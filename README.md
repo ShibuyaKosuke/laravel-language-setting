@@ -36,6 +36,12 @@ Publish these files like belows.
 php artisan lang:list
 ```
 
+## Languages
+
+| language | locale |
+|:--------:|:--------:|
+| Japanese | ja |
+
 ## Contribution
 
 If you have other language files, clone this repository and add your language files.
