@@ -28,9 +28,9 @@ class CommandServiceProvider extends ServiceProvider
 
         $this->publishes([
             sprintf('%s/%s/%s', __DIR__, '../Resources/lang', $lang) =>
-                resource_path(sprintf('lang/%s', App::getLocale())),
+                resource_path(sprintf('lang/%s', $lang)),
             sprintf('%s/%s/%s.json', __DIR__, '../Resources/lang', $lang) =>
-                resource_path(sprintf('lang/%s.json', App::getLocale())),
+                resource_path(sprintf('lang/%s.json', $lang)),
         ]);
     }
 
