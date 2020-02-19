@@ -1,6 +1,6 @@
 {
     "name": "shibuyakosuke/laravel-language-setting",
-    "description": "Translate files generator for larave",
+    "description": "Translate files generator for laravel",
     "type": "library",
     "license": "MIT",
     "authors": [
