@@ -1,0 +1,27 @@
+{
+    "name": "shibuyakosuke/laravel-language-setting",
+    "description": "Laravel CRUD generator for laravel-adminlte",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ShibuyaKosuke",
+            "email": "shibuya@imagenious.co.jp"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ShibuyaKosuke\\LaravelLanguageSetting\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShibuyaKosuke\\LaravelLanguageSetting\\Providers\\CommandServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "laravel/framework": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0"
+    }
+}
