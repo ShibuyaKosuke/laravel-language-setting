@@ -4,6 +4,7 @@ namespace ShibuyaKosuke\LaravelLanguageSetting\Providers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
+use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageListCheckCommand;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageListCommand;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageSettingCommand;
 
@@ -46,10 +47,14 @@ class CommandServiceProvider extends ServiceProvider
         $this->app->singleton('command.shibuyakosuke.lang.list', function () {
             return new LanguageListCommand();
         });
+        $this->app->singleton('command.shibuyakosuke.lang.check', function () {
+            return new LanguageListCheckCommand();
+        });
 
         $this->commands([
             'command.shibuyakosuke.lang.setting',
             'command.shibuyakosuke.lang.list',
+            'command.shibuyakosuke.lang.check',
         ]);
     }
 
