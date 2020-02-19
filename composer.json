@@ -1,6 +1,6 @@
 {
     "name": "shibuyakosuke/laravel-language-setting",
-    "description": "Laravel CRUD generator for laravel-adminlte",
+    "description": "Translate files generator for larave",
     "type": "library",
     "license": "MIT",
     "authors": [
