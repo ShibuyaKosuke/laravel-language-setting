@@ -4,6 +4,7 @@ namespace ShibuyaKosuke\LaravelLanguageSetting\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use ShibuyaKosuke\LaravelLanguageSetting\Providers\CommandServiceProvider;
 
 class LanguageSettingCommand extends Command
 {
@@ -26,16 +27,19 @@ class LanguageSettingCommand extends Command
      */
     public function handle(): void
     {
-        if (App::getLocale() !== $this->argument('language')) {
-            $this->error(sprintf(
-                'Error: Set locale \'%s\' to \'%s\' in config/app.php',
-                App::getLocale(),
-                $this->argument('language')
-            ));
+        $language = $this->argument('language');
+
+        if (App::getLocale() === $language) {
+            $this->call('vendor:publish', [
+                '--provider' => CommandServiceProvider::class
+            ]);
             return;
         }
-        $this->call('vendor:publish', [
-            '--provider' => 'ShibuyaKosuke\LaravelLanguageSetting\Providers\CommandServiceProvider'
-        ]);
+
+        $this->error(sprintf(
+            'Error: Set locale \'%s\' to \'%s\' in config/app.php',
+            App::getLocale(),
+            $this->argument('language')
+        ));
     }
 }

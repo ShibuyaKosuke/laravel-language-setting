@@ -4,6 +4,7 @@ namespace ShibuyaKosuke\LaravelLanguageSetting\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Lang;
 
 class LanguageListCheckCommand extends Command
 {
@@ -37,24 +38,6 @@ class LanguageListCheckCommand extends Command
     }
 
     /**
-     * @param $language
-     */
-    private function getKeys($language)
-    {
-        $files = $this->getFilenames($language);
-        $keys = [];
-        $files->map(function ($file, $key) use (&$keys) {
-            if ($key === 'json') {
-                $arr = json_decode(file_get_contents($file), true, 512, JSON_OBJECT_AS_ARRAY);
-                $keys[basename($file)] = array_keys($arr);
-            } else {
-                $base_path = App::basePath('vendor/shibuyakosuke/laravel-language-setting/Resources/lang/' . basename($file));
-//                dd($base_path);
-            }
-        });
-    }
-
-    /**
      * @return void
      */
     public function handle(): void
@@ -74,6 +57,5 @@ class LanguageListCheckCommand extends Command
             $this->error('Error: lack of files needed.');
             return;
         }
-        $this->getKeys($language);
     }
 }
