@@ -2,11 +2,11 @@
 
 namespace ShibuyaKosuke\LaravelLanguageSetting\Console;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use ShibuyaKosuke\LaravelLanguageSetting\Providers\CommandServiceProvider;
 
-class LanguageSettingCommand extends Command
+class LanguageSettingCommand extends Language
 {
     /**
      * The name and signature of the console command.
@@ -29,7 +29,17 @@ class LanguageSettingCommand extends Command
     {
         $language = $this->argument('language');
 
-        if (App::getLocale() === $language) {
+        foreach ($this->getFilenames($language) as $filename) {
+            if ($filename == false) {
+                $this->error(sprintf(
+                    'Error: Language: \'%s\' is not available.',
+                    $language
+                ));
+                return;
+            }
+        }
+
+        if (Str::is(App::getLocale(), $language)) {
             $this->call('vendor:publish', [
                 '--provider' => CommandServiceProvider::class
             ]);

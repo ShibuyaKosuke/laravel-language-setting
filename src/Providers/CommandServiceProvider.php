@@ -4,6 +4,7 @@ namespace ShibuyaKosuke\LaravelLanguageSetting\Providers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageListCheckCommand;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageListCommand;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageSettingCommand;
@@ -22,7 +23,7 @@ class CommandServiceProvider extends ServiceProvider
 
         $lang = App::getLocale();
 
-        if ($lang === 'en') {
+        if (Str::is($lang, 'en')) {
             return;
         }
 

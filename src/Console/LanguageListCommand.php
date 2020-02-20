@@ -2,11 +2,11 @@
 
 namespace ShibuyaKosuke\LaravelLanguageSetting\Console;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Symfony\Component\Finder\SplFileInfo;
 
-class LanguageListCommand extends Command
+class LanguageListCommand extends Language
 {
     /**
      * The name and signature of the console command.
@@ -49,6 +49,9 @@ class LanguageListCommand extends Command
 
         $tmp = [];
         foreach ($rows as $lang => $item) {
+            if (Str::is($lang, 'en')) {
+                continue;
+            }
             $tmp[] = array_merge([
                 'lang' => null,
                 'json' => null,
