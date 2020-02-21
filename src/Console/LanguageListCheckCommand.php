@@ -16,7 +16,7 @@ class LanguageListCheckCommand extends Language
      *
      * @var string
      */
-    protected $description = 'Show language list.';
+    protected $description = 'Check language files exist.';
 
     /**
      * @return void

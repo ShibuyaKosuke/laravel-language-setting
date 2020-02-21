@@ -64,6 +64,7 @@ class CommandServiceProvider extends ServiceProvider
         return [
             'command.shibuyakosuke.lang.setting',
             'command.shibuyakosuke.lang.list',
+            'command.shibuyakosuke.lang.check',
         ];
     }
 }
