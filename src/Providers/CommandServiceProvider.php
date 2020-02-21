@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageListCheckCommand;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageListCommand;
+use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageMockCommand;
 use ShibuyaKosuke\LaravelLanguageSetting\Console\LanguageSettingCommand;
 
 /**
@@ -51,11 +52,15 @@ class CommandServiceProvider extends ServiceProvider
         $this->app->singleton('command.shibuyakosuke.lang.check', function () {
             return new LanguageListCheckCommand();
         });
+        $this->app->singleton('command.shibuyakosuke.lang.mock', function () {
+            return new LanguageMockCommand();
+        });
 
         $this->commands([
             'command.shibuyakosuke.lang.setting',
             'command.shibuyakosuke.lang.list',
             'command.shibuyakosuke.lang.check',
+            'command.shibuyakosuke.lang.mock',
         ]);
     }
 
@@ -65,6 +70,7 @@ class CommandServiceProvider extends ServiceProvider
             'command.shibuyakosuke.lang.setting',
             'command.shibuyakosuke.lang.list',
             'command.shibuyakosuke.lang.check',
+            'command.shibuyakosuke.lang.mock',
         ];
     }
 }
