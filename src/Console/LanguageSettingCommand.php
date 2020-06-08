@@ -29,27 +29,24 @@ class LanguageSettingCommand extends Language
     {
         $language = $this->argument('language');
 
-        foreach ($this->getFilenames($language) as $filename) {
-            if ($filename == false) {
-                $this->error(sprintf(
-                    'Error: Language: \'%s\' is not available.',
-                    $language
-                ));
-                return;
-            }
+        $file_count = $this->getFilenames($language)
+            ->filter(function ($filename) {
+                return $filename !== false;
+            })
+            ->count();
+
+        if ($file_count === 0) {
+            $this->error(sprintf('Error: Language: \'%s\' is not available.', $language));
+            return;
         }
 
         if (Str::is(App::getLocale(), $language)) {
-            $this->call('vendor:publish', [
-                '--provider' => CommandServiceProvider::class
-            ]);
+            $this->call('vendor:publish', ['--provider' => CommandServiceProvider::class]);
             return;
         }
 
         $this->error(sprintf(
-            'Error: Set locale \'%s\' to \'%s\' in config/app.php',
-            App::getLocale(),
-            $this->argument('language')
+            'Error: Set locale \'%s\' to \'%s\' in config/App.php', App::getLocale(), $language
         ));
     }
 }
