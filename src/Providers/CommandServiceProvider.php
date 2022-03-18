@@ -20,7 +20,7 @@ class CommandServiceProvider extends ServiceProvider
 
     protected function langPath(string $lang): string
     {
-      if ((int) substr(app()->version(), 1) < 9) {
+      if ((int) substr(app()->version(), 0 , 1) >= 9) {
         return app()->langPath($lang);
       }
 
