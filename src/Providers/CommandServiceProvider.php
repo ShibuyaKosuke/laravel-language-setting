@@ -18,6 +18,15 @@ class CommandServiceProvider extends ServiceProvider
 {
     protected $defer = true;
 
+    protected function langPath(string $lang): string
+    {
+      if ((int) substr(app()->version(), 0 , 1) >= 9) {
+        return app()->langPath($lang);
+      }
+
+      return resource_path(sprintf('lang/%s', $lang));
+    }
+
     public function boot()
     {
         $this->registerCommands();
@@ -30,9 +39,9 @@ class CommandServiceProvider extends ServiceProvider
 
         $this->publishes([
             sprintf('%s/%s/%s', __DIR__, '../Resources/lang', $lang) =>
-                resource_path(sprintf('lang/%s', $lang)),
+                $this->langPath($lang),
             sprintf('%s/%s/%s.json', __DIR__, '../Resources/lang', $lang) =>
-                resource_path(sprintf('lang/%s.json', $lang)),
+                $this->langPath(sprintf('%s.json', $lang)),
         ]);
     }
 
